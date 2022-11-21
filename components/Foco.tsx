@@ -17,6 +17,7 @@ const FocoAlgoritm = (matrix: any) => {
 
   var ctx1 = canvas1?.getContext("2d");
 
+  canvas1.removeEventListener("mousedown", manejadorRaton, true);
   canvas1.addEventListener("mousemove", manejadorRaton, false);
 
   var curFile = imagen1.files;
@@ -91,7 +92,6 @@ const FocoAlgoritm = (matrix: any) => {
     }
 
     ctx1.putImageData(originalImage2, 0, 0);
-    // console.log(canvas)
     transform(X, Y);
   }
 
@@ -214,20 +214,27 @@ export const Foco = () => {
             />
           ))}
         </div>
-        <Button onClick={() => {
-          const valores = pings.current.map((e: any) => e.value);
-          var isAnyElementEmpty = false;
-          var list = [];
+        <Button
+          onClick={() => {
+            const valores = pings.current.map((e: any) => e.value);
+            var isAnyElementEmpty = false;
+            var list = [];
+            for (var i = 0; i < valores.length; i++) {
+              list.push(parseInt(valores[i]));
+              if (valores[i] == "" || valores[i] == "-")
+                isAnyElementEmpty = true;
+            }
+            if (!isAnyElementEmpty) {
+              // console.log("Actualizado");
+              FocoAlgoritm(list);
+            }
+          }}
+          variant="primary"
+        >
+          {" "}
 
-          for (var i = 0; i < valores.length; i++) {
-            list.push(parseInt(valores[i]));
-            if (valores[i] == "" || valores[i] == "-") isAnyElementEmpty = true;
-          }
-          if (!isAnyElementEmpty) {
-            // console.log("Actualizado");
-            FocoAlgoritm(list);
-          }
-        }} variant="primary"> Hola</Button>
+          Aplicar
+        </Button>
       </div>
 
       <div className="container mx-auto flex justify-center pb-10">
