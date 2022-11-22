@@ -187,4 +187,3 @@ export const Convolucion = () => {
     </div>
   );
 };
-//https://setosa.io/ev/image-kernels/

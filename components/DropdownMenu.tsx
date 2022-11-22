@@ -39,7 +39,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Bordes
           </DropdownMenuItem>
-
           <DropdownMenu.Sub>
             <DropdownMenuSubTrigger>
               Desplazamiento
@@ -55,7 +54,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
               </DropdownMenuSubContent>
             </DropdownMenu.Portal>
           </DropdownMenu.Sub>
-
           <DropdownMenuItem>Foco</DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
@@ -83,7 +81,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             </DropdownMenu.Portal>
           </DropdownMenu.Sub>
           <DropdownMenuArrow />
-
           <DropdownMenuItem>Otro</DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
