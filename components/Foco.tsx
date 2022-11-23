@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useRef, useState } from "react";
 
 import { Button } from "./Button";
 import { Input } from "./Input";
+import { NavigationMenuDemo } from "./NavigationMenuDemo";
 
 const FocoAlgoritm = (matrix: any) => {
   var canvas1 = document.getElementById(
@@ -189,54 +190,15 @@ const variants = [
 ];
 
 export const Foco = () => {
-  const pings = useRef<HTMLInputElement | any>([]);
-  const [matrixDimension, setMatrixDimension] = useState(3);
+  const [matrix, setMatrix] = useState([0, 0, 0, 0, 1, 0, 0, 0, 0])
 
   return (
     <div>
       <Input
         idInput="imagen1"
-        selectTool={() => FocoAlgoritm([-2, -1, 0, -1, 1, 1, 0, 1, 2])}
+        selectTool={() => FocoAlgoritm(matrix)}
       />
-
-      <div
-        // onChange={}
-        className="w-full flex items-center space-x-5 justify-center"
-      >
-        <div className="grid grid-cols-3 w-[150px] h-[150px] bg-rojo/90 ">
-          {[...Array(matrixDimension * matrixDimension)].map((e, i) => (
-            <input
-              ref={(element) => (pings.current[i] = element)}
-              key={i}
-              type="number"
-              defaultValue={0}
-              className="bg-transparent text-center h-[50px] w-[50px] border border-black"
-            />
-          ))}
-        </div>
-        <Button
-          onClick={() => {
-            const valores = pings.current.map((e: any) => e.value);
-            var isAnyElementEmpty = false;
-            var list = [];
-            for (var i = 0; i < valores.length; i++) {
-              list.push(parseInt(valores[i]));
-              if (valores[i] == "" || valores[i] == "-")
-                isAnyElementEmpty = true;
-            }
-            if (!isAnyElementEmpty) {
-              // console.log("Actualizado");
-              FocoAlgoritm(list);
-            }
-          }}
-          variant="primary"
-        >
-          {" "}
-
-          Aplicar
-        </Button>
-      </div>
-
+      <NavigationMenuDemo FocoAlgoritm={FocoAlgoritm} matrix={matrix} setMatrix={setMatrix} />
       <div className="container mx-auto flex justify-center pb-10">
         {variants.map((variant, target) => (
           <div
