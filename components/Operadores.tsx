@@ -216,7 +216,7 @@ export const Operadores = () => {
     <div>
       <Input idInput="imagen1" selectTool={OperadoresAlgoritm} />
 
-      <button className="bg-slate-700 hover:bg-rojo text-white fixed left-[200px] top-4 font-bold py-2 px-4 rounded h-11 w-36 cursor-pointer">
+      <button className="bg-slate-700 z-50 hover:bg-rojo text-white fixed left-[200px] top-4 font-bold py-2 px-4 rounded h-11 w-36 cursor-pointer">
         Subir Imágen
         <input
           onChange={OperadoresAlgoritm}
