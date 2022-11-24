@@ -8,7 +8,7 @@ export const ImageCard = (props: ImageCardProps) => {
 
   return (
     <div
-      className="max-w-[600px] bg-[#fffaeb] mb-10 rounded-lg border border-gray-200 shadow-slate-700 shadow-2xl dark:bg-gray-800 dark:border-gray-700"
+      className="max-w-[800px] bg-[#fffaeb] mb-10 rounded-lg border border-gray-200 shadow-slate-700 shadow-2xl dark:bg-gray-800 dark:border-gray-700"
       key={target}
     >
       <div className="p-5">

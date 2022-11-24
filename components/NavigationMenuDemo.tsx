@@ -33,7 +33,7 @@ export const NavigationMenuDemo = (props: NavigationMenuDemoProps) => {
         }
         , {
             name: 'Outline',
-            matrix: [-1, -1, -1, -1, 8 - 1, -1, -1, -1],
+            matrix: [-1, -1, -1, -1, 8, -1, -1, -1, -1],
         }
         , {
             name: 'Right Sobel',
@@ -57,8 +57,8 @@ export const NavigationMenuDemo = (props: NavigationMenuDemoProps) => {
                         Personalizado <CaretDown aria-hidden />
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <div className='w-[650px] flex p-4 flex-col items-center space-y-2'>
-                            <div className="grid grid-cols-3 w-[150px] h-[150px] bg-principal ">
+                        <div className='w-[300px] flex p-4 flex-col items-center space-y-5'>
+                            <div className="grid grid-cols-3 shadow-xl shadow-blue-400 w-[150px] h-[150px] rounded-xl bg-gradient-to-r from-blue-400 to-emerald-400">
                                 {
                                     matrix.map((e, i) => (
                                         <input
@@ -66,7 +66,7 @@ export const NavigationMenuDemo = (props: NavigationMenuDemoProps) => {
                                             key={i}
                                             type="number"
                                             defaultValue={e}
-                                            className="bg-transparent text-center h-[50px] w-[50px] border border-black"
+                                            className={`bg-transparent text-center h-[50px] w-[50px] border ${i == 0 ? 'rounded-tl-xl' : (i == 2 ? 'rounded-tr-xl' : (i == 6 ? 'rounded-bl-xl' : (i == 8 ? 'rounded-br-xl' : null)))}`}
                                         />
                                     ))
                                 }
@@ -104,15 +104,15 @@ export const NavigationMenuDemo = (props: NavigationMenuDemoProps) => {
                                 {element.name} <CaretDown aria-hidden />
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <div className='w-[650px] flex p-4 flex-col items-center space-y-2'>
-                                    <div className="grid grid-cols-3 w-[150px] h-[150px] bg-principal ">
+                                <div className='w-[300px] flex p-4 flex-col items-center space-y-2'>
+                                    <div className="grid grid-cols-3 shadow-xl shadow-blue-400 w-[150px] h-[150px] rounded-xl bg-gradient-to-r from-blue-400 to-emerald-400">
                                         {
                                             element.matrix.map((e, i) => (
                                                 <input
                                                     ref={(element) => (pings.current[i] = element)}
                                                     key={i}
                                                     defaultValue={e}
-                                                    className="bg-transparent text-center h-[50px] w-[50px] border border-black"
+                                                    className={`bg-transparent text-center h-[50px] w-[50px] border ${i == 0 ? 'rounded-tl-xl' : (i == 2 ? 'rounded-tr-xl' : (i == 6 ? 'rounded-bl-xl' : (i == 8 ? 'rounded-br-xl' : null)))}`}
                                                 />
                                             ))
                                         }
@@ -193,13 +193,14 @@ const fadeOut = keyframes({
 const NavigationMenuRoot = styled(NavigationMenu.Root, {
     position: 'relative',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'start',
     width: '100vw',
     zIndex: 1,
 });
 
 const NavigationMenuList = styled(NavigationMenu.List, {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'end',
     backgroundColor: 'white',
     padding: 4,
@@ -226,17 +227,10 @@ const NavigationMenuTrigger = styled(NavigationMenu.Trigger, {
     all: 'unset',
     ...itemStyles,
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'start',
     justifyContent: 'space-between',
+    width: 'calc(100% - 25px)',
     gap: 2,
-});
-
-const NavigationMenuLink = styled(NavigationMenu.Link, {
-    ...itemStyles,
-    display: 'block',
-    textDecoration: 'none',
-    fontSize: 15,
-    lineHeight: 1,
 });
 
 const NavigationMenuContent = styled(NavigationMenu.Content, {
@@ -267,7 +261,9 @@ const NavigationMenuIndicator = styled(NavigationMenu.Indicator, {
 });
 
 const NavigationMenuViewport = styled(NavigationMenu.Viewport, {
-    position: 'relative',
+    position: 'absolute',
+    left: 170,
+    top: -250,
     transformOrigin: 'top center',
     marginTop: 10,
     width: '100%',

@@ -7,7 +7,7 @@ export const Input = (props: InputProps) => {
   const { selectTool, idInput } = props;
 
   return (
-    <button className="bg-rojo/80 hover:bg-rojo text-white fixed left-10 top-4 font-bold py-2 px-4 rounded h-11 w-36 cursor-pointer">
+    <button className="bg-purple-600 z-50 text-white fixed left-10 top-4 font-bold py-2 px-4 rounded h-11 w-36 cursor-pointer">
       Subir Imágen
       <input
         onChange={selectTool}

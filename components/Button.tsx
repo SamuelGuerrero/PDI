@@ -15,7 +15,7 @@ export const Button = (props: ButtonProps) => {
   const btnStyle = classNames(
     '',
     variant === 'primary'
-      ? 'bg-rojo/80 hover:bg-rojo text-white font-bold py-2 px-4 rounded h-11 w-36 cursor-pointer'
+      ? 'bg-emerald-400 shadow-xl shadow-esmerald-400 hover:bg-rojo text-white font-bold py-2 px-4 rounded h-11 w-36 cursor-pointer'
       : null,
   );
 

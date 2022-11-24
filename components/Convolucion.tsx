@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
-
-import { Button } from "./Button";
+import DropdownMenuMatrix from "./DropdownMenuMatrix";
 import { ImageCard } from "./ImageCard";
 import { Input } from "./Input";
-import Selector from "./Selector";
+import { NavigationMenuDemo } from "./NavigationMenuDemo";
+import { useState } from "react";
 
 const ConvolutionAlgoritm = (matrix: any) => {
   var canvas1 = document.getElementById(
@@ -21,7 +20,6 @@ const ConvolutionAlgoritm = (matrix: any) => {
   var matrixMean = matrix.reduce((partialSum, a) => partialSum + a, 0);
   if (matrixMean == 0) matrixMean = 1;
   if (matrixMean < 0) matrixMean = Math.abs(matrixMean);
-  //console.log(matrixMean / matrix.length);
 
   var curFile = imagen1.files;
 
@@ -135,54 +133,27 @@ const variants = [
 ];
 
 export const Convolucion = () => {
-  const pings = useRef<HTMLInputElement | any>([]);
-  const [matrixDimension, setMatrixDimension] = useState(3)
+  const [matrix, setMatrix] = useState([0, 0, 0, 0, 1, 0, 0, 0, 0])
 
   return (
     <div>
       <Input
         idInput="imagen1"
         selectTool={() => {
-          ConvolutionAlgoritm([0]);
+          ConvolutionAlgoritm([0, 0, 0, 0, 1, 0, 0, 0, 0]);
         }}
       />
 
-      <form
-        onChange={() => {
-          const valores = pings.current.map((e: any) => e.value);
-          var isAnyElementEmpty = false;
-          var list = [];
+      <div className="absolute top-[100px] left-10 z-0">
+        <DropdownMenuMatrix FocoAlgoritm={ConvolutionAlgoritm} matrix={matrix} setMatrix={setMatrix} />
+      </div>
 
-          for (var i = 0; i < valores.length; i++) {
-            list.push(parseInt(valores[i]));
-            if (valores[i] == "" || valores[i] == "-") isAnyElementEmpty = true;
-          }
-          if (!isAnyElementEmpty) {
-            ConvolutionAlgoritm(list);
-          }
-        }}
-        className="w-full flex items-center space-x-5 justify-center"
-      >
-        <div className="grid grid-cols-3 w-[150px] h-[150px] bg-rojo/90 ">
-          {[...Array(matrixDimension * matrixDimension)].map((e, i) => (
-            <input
-              ref={(element) => (pings.current[i] = element)}
-              key={i}
-              type="number"
-              defaultValue={0}
-              className="bg-transparent text-center h-[50px] w-[50px] border border-black"
-            />
-          ))}
+
+      <div className="container mx-auto flex justify-center absolute top-[150px]">
+        <div className="hidden w-0 h-0">
+          <ImageCard variantName={'Imágen Original'} target={0} />
         </div>
-            
-        <Selector setMatrixDimension={setMatrixDimension} />
-      </form>
-      <h1>{matrixDimension}</h1>
-
-      <div className="container mx-auto grid grid-cols-2 gap-y-10 place-items-center mb-10">
-        {variants.map((variant, target) => (
-          <ImageCard key={target} variantName={variant.name} target={target} />
-        ))}
+        <ImageCard variantName={'Imágen con Convolución'} target={1} />
       </div>
     </div>
   );
