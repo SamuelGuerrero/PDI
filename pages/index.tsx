@@ -4,9 +4,11 @@ import { Bordes } from "../components/Bordes";
 import { Convolucion } from "../components/Convolucion";
 import { Foco } from "../components/Foco";
 import Head from "next/head";
+import { Histograma } from "../components/Histograma";
 import { NavBar } from "../components/NavBar";
 import { Operadores } from "../components/Operadores";
 import { RGB } from "../components/RGB";
+import { Scala } from "../components/Scala";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -32,6 +34,8 @@ export default function Home() {
         <div>{toolSelected == "Operadores" && <Operadores />}</div>
         <div>{toolSelected == "Convolucion" && <Convolucion />}</div>
         <div>{toolSelected == "Foco" && <Foco />}</div>
+        <div>{toolSelected == "Histograma" && <Histograma />}</div>
+        <div>{toolSelected == "Scala" && <Scala />}</div>
       </div>
     </div>
   );
