@@ -13,7 +13,7 @@ export const ImageCard = (props: ImageCardProps) => {
     >
       <div className="p-5">
         <a href="#">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
+          <h5 className="mb-2 text-3xl font-ramptartOne tracking-tight text-gray-900 dark:text-white text-center">
             {variantName}
           </h5>
         </a>

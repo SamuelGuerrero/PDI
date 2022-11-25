@@ -227,7 +227,7 @@ export const Operadores = () => {
         />
       </button>
 
-      <div className="container mx-auto grid grid-cols-3 gap-y-20 place-items-center pb-10">
+      <div className="container flex flex-col items-center mx-auto">
         {variants.map((variant, target) => (
           <ImageCard key={target} variantName={variant.name} target={target} />
         ))}

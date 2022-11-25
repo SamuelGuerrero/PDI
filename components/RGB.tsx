@@ -104,10 +104,7 @@ export const RGB = () => {
   return (
     <div>
       <Input idInput="imagen1" selectTool={RGBAlgoritm} />
-
-      
-
-      <div className="container mx-auto grid grid-cols-2 gap-y-20 place-items-center">
+      <div className="container flex flex-col items-center mx-auto">
         {variants.map((variant, target) => (
           <ImageCard key={target} variantName={variant.name} target={target} />
         ))}
