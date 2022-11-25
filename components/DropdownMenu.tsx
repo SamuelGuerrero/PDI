@@ -54,7 +54,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
               </DropdownMenuSubContent>
             </DropdownMenu.Portal>
           </DropdownMenu.Sub>
-          <DropdownMenuItem>Foco</DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
               setMode("RGB");
@@ -81,7 +80,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             </DropdownMenu.Portal>
           </DropdownMenu.Sub>
           <DropdownMenuArrow />
-          <DropdownMenuItem>Otro</DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
               setMode("Operadores");
@@ -105,6 +103,22 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             }}
           >
             Foco
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Histograma");
+              localStorage.setItem("toolSelected", "Histograma");
+            }}
+          >
+            Histograma
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Scala");
+              localStorage.setItem("toolSelected", "Scala");
+            }}
+          >
+            Scala
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
@@ -136,6 +150,7 @@ const contentStyles = {
   minWidth: 220,
   backgroundColor: "#ffeaad",
   borderRadius: 6,
+  zIndex: 100,
   padding: 5,
   boxShadow:
     "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
@@ -202,14 +217,6 @@ const DropdownMenuSeparator = styled(DropdownMenu.Separator, {
   margin: 5,
 });
 
-const DropdownMenuItemIndicator = styled(DropdownMenu.ItemIndicator, {
-  position: "absolute",
-  left: 0,
-  width: 25,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-});
 
 const RightSlot = styled("div", {
   marginLeft: "auto",
