@@ -14,7 +14,7 @@ export const NavBar = (props: NavBarProps) => {
       <h1 className="text-5xl text-[#000000] font-ramptartOne">
         {toolSelected}
       </h1>
-      <div className="absolute right-10">
+      <div className="absolute right-10 z-50">
         <DropdownMenuDemo setMode={setMode} />
       </div>
     </nav>
