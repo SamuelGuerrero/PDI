@@ -1,20 +1,26 @@
 import * as Slider from '@radix-ui/react-slider';
 
+import React, { useRef } from 'react';
 import { blackA, violet } from '@radix-ui/colors';
 
-import React from 'react';
 import { styled } from '@stitches/react';
 
-export const SliderDemo = () => (
-  <form>
-    <SliderRoot defaultValue={[0]} max={5} step={1} aria-label="Volume">
-      <SliderTrack>
-        <SliderRange />
-      </SliderTrack>
-      <SliderThumb />
-    </SliderRoot>
-  </form>
-);
+export const SliderDemo = () => {
+  const sliderRef = useRef(null)
+
+  return (
+    <form onChange={() => {
+      console.log(sliderRef.current.defaultValue)
+    }}>
+      <SliderRoot ref={sliderRef} defaultValue={[0]} max={5} step={1} aria-label="Volume">
+        <SliderTrack>
+          <SliderRange />
+        </SliderTrack>
+        <SliderThumb />
+      </SliderRoot>
+    </form>
+  )
+};
 
 const SliderRoot = styled(Slider.Root, {
   position: 'relative',

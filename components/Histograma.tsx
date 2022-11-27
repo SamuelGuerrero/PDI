@@ -3,23 +3,26 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ImageCard } from "./ImageCard";
 import { Input } from "./Input";
 
-const BordesAplicados = (setRedChannel: Dispatch<SetStateAction<any[]>>, setGreenChannel: Dispatch<SetStateAction<any[]>>, setBlueChannel: Dispatch<SetStateAction<any[]>>,) => {
+const HistogramaAlgoritm = (setRedChannel: Dispatch<SetStateAction<any[]>>, setGreenChannel: Dispatch<SetStateAction<any[]>>, setBlueChannel: Dispatch<SetStateAction<any[]>>, desplazamiento: number) => {
     var canvas1 = document.getElementById(
         "canvasImagen1"
+    ) as HTMLCanvasElement | null;
+    var canvas2 = document.getElementById(
+        "canvasImagen2"
     ) as HTMLCanvasElement | null;
 
     var image1 = new Image();
     var imagen1 = document.getElementById("imagen1") as HTMLInputElement;
 
     var ctx1 = canvas1?.getContext("2d");
-
+    var ctx2 = canvas2?.getContext("2d");
 
     var curFile = imagen1.files;
     image1.src = window.URL.createObjectURL(curFile[0]);
     image1.onload = function () {
         canvas1.width = image1.width;
         canvas1.height = image1.height;
-        ctx1.drawImage(image1, 0, 0);
+        ctx1.drawImage(image1, 0, 4);
         histograma();
     };
 
@@ -34,47 +37,47 @@ const BordesAplicados = (setRedChannel: Dispatch<SetStateAction<any[]>>, setGree
         const pixels = image.data;
         const numPixels = image.width * image.height;
 
+
+        for (i = 0; i < numPixels; i++) {
+            pixels[i * 4] = pixels[i * 4] + desplazamiento
+            pixels[i * 4 + 1] = pixels[i * 4 + 1] + desplazamiento
+            pixels[i * 4 + 2] = pixels[i * 4 + 2] + desplazamiento
+        }
+        canvas2.width = canvas1.width;
+        canvas2.height = canvas1.height;
+        ctx2.putImageData(image, 0, 0);
+
+
         for (var i = 0; i < numPixels; i++) {
             redChannelValues[pixels[i * 4]] += 1;
             greenChannelValues[pixels[i * 4 + 1]] += 1;
             blueChannelValues[pixels[i * 4 + 2]] += 1;
         }
 
-        var maxR = 0, maxG = 0, maxB = 0;
-
-        for (i = 0; i < redChannelValues.length; i++)
-            maxR = redChannelValues[i] > maxR ? redChannelValues[i] : maxR
-
-        for (i = 0; i < greenChannelValues.length; i++)
-            maxG = greenChannelValues[i] > maxG ? greenChannelValues[i] : maxG
-
-        for (i = 0; i < blueChannelValues.length; i++)
-            maxB = blueChannelValues[i] > maxB ? blueChannelValues[i] : maxB
-
-
+        var maxR = Math.max(...redChannelValues)
+        var maxG = Math.max(...greenChannelValues)
+        var maxB = Math.max(...blueChannelValues);
 
         for (i = 0; i < redChannelValues.length; i++) {
             redChannelValues[i] = Math.trunc((redChannelValues[i] * 400) / maxR)
-        }
-
-        for (i = 0; i < greenChannelValues.length; i++) {
             greenChannelValues[i] = Math.trunc((greenChannelValues[i] * 400) / maxG)
-        }
-
-        for (i = 0; i < blueChannelValues.length; i++) {
             blueChannelValues[i] = Math.trunc((blueChannelValues[i] * 400) / maxB)
         }
+
+        console.log(redChannelValues)
 
         setRedChannel(redChannelValues)
         setGreenChannel(greenChannelValues)
         setBlueChannel(blueChannelValues)
     }
-
 };
 
 const variants = [
     {
         name: "Imágen Original",
+    },
+    {
+        name: "Imágen Modificada",
     },
 ];
 
@@ -85,45 +88,46 @@ export const Histograma = () => {
 
     return (
         <div>
-            <Input idInput="imagen1" selectTool={() => BordesAplicados(setRedChannel, setBlueChannel, setGreenChannel)} />
+            <Input idInput="imagen1" selectTool={() => HistogramaAlgoritm(setRedChannel, setBlueChannel, setGreenChannel, 0)} />
 
-            <div className="container flex justify-center mb-5 mx-auto">
-                {variants.map((variant, target) => (
-                    <ImageCard variantName={variant.name} target={target} />
-                ))}
+            <div className="container mx-auto flex space-x-5 justify-center">
+                <ImageCard variantName={"Imagen Original"} target={0} />
+                <ImageCard variantName={"Imagen Modificada"} target={1} />
             </div>
 
-            <div className="w-full flex pb-5">
-
-                <div className="flex flex-col bg-[#fffaeb] shadow-red-600 shadow-2xl w-min mx-auto ">
-                    <h1 className="text-center font-ramptartOne text-red-600 text-4xl">Red</h1>
-                    <div className="flex justify-center items-baseline">
-                        {redChannel.map((el, i) => (
-                            <div style={{ height: (el * 0.8) }} className="w-[1.5px] bottom-0 bg-red-600" key={i} />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="flex flex-col bg-[#fffaeb] shadow-green-800 shadow-2xl w-min mx-auto">
-                    <h1 className="text-center font-ramptartOne text-green-800 text-4xl">Green</h1>
-                    <div className="flex justify-center items-baseline">
-                        {greenChannel.map((el, i) => (
-                            <div style={{ height: (el * 0.8) }} className="w-[1.5px] bottom-0 bg-green-800" key={i} />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="flex flex-col bg-[#fffaeb] shadow-blue-700 shadow-2xl w-min mx-auto">
-                    <h1 className="text-center font-ramptartOne text-blue-700 text-4xl">Blue</h1>
-                    <div className="flex justify-center items-baseline">
-                        {blueChannel.map((el, i) => (
-                            <div style={{ height: (el * 0.8) }} className="w-[1.5px] bottom-0 bg-blue-700" key={i} />
-                        ))}
-                    </div>
-                </div>
-
+            <div className="w-full flex justify-center mb-4">
+                <input className="w-[400px]" type={'range'} min={-256} max={256} defaultValue={0} onChange={(e) => HistogramaAlgoritm(setRedChannel, setBlueChannel, setGreenChannel, parseInt(e.target.value))} />
             </div>
-
+            {
+                redChannel.length > 1 && (
+                    <div className="w-full flex pb-5">
+                        <div className="flex flex-col bg-[#fffaeb] shadow-red-600 shadow-2xl w-min mx-auto ">
+                            <h1 className="text-center font-ramptartOne text-red-600 text-4xl">Red</h1>
+                            <div className="flex justify-center items-baseline">
+                                {redChannel.map((el, i) => (
+                                    <div style={{ height: (el * 0.8) }} className="w-[1.5px] bottom-0 bg-red-600" key={i} />
+                                ))}
+                            </div>
+                        </div>
+                        <div className="flex flex-col bg-[#fffaeb] shadow-green-800 shadow-2xl w-min mx-auto">
+                            <h1 className="text-center font-ramptartOne text-green-800 text-4xl">Green</h1>
+                            <div className="flex justify-center items-baseline">
+                                {greenChannel.map((el, i) => (
+                                    <div style={{ height: (el * 0.8) }} className="w-[1.5px] bottom-0 bg-green-800" key={i} />
+                                ))}
+                            </div>
+                        </div>
+                        <div className="flex flex-col bg-[#fffaeb] shadow-blue-700 shadow-2xl w-min mx-auto">
+                            <h1 className="text-center font-ramptartOne text-blue-700 text-4xl">Blue</h1>
+                            <div className="flex justify-center items-baseline">
+                                {blueChannel.map((el, i) => (
+                                    <div style={{ height: (el * 0.8) }} className="w-[1.5px] bottom-0 bg-blue-700" key={i} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
 };
