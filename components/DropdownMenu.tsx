@@ -39,21 +39,16 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Bordes
           </DropdownMenuItem>
-          <DropdownMenu.Sub>
-            <DropdownMenuSubTrigger>
-              Desplazamiento
-              <RightSlot>
-                <ChevronRightIcon />
-              </RightSlot>
-            </DropdownMenuSubTrigger>
-            <DropdownMenu.Portal>
-              <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
-                <DropdownMenuItem>Desplazamiento Normal</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Promediando</DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Sub>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Desplazamiento");
+              localStorage.setItem("toolSelected", "Desplazamiento");
+            }}
+          >
+            Desplazamiento
+          </DropdownMenuItem>  
+
           <DropdownMenuItem
             onClick={() => {
               setMode("RGB");
@@ -64,22 +59,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem>Rotar</DropdownMenuItem>
           <DropdownMenuItem>Scalar</DropdownMenuItem>
-          <DropdownMenu.Sub>
-            <DropdownMenuSubTrigger>
-              Scala
-              <RightSlot>
-                <ChevronRightIcon />
-              </RightSlot>
-            </DropdownMenuSubTrigger>
-            <DropdownMenu.Portal>
-              <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
-                <DropdownMenuItem>Eliminando</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Promediando</DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Sub>
-          <DropdownMenuArrow />
           <DropdownMenuItem
             onClick={() => {
               setMode("Operadores");
@@ -166,9 +145,6 @@ const contentStyles = {
 };
 
 const DropdownMenuContent = styled(DropdownMenu.Content, contentStyles);
-const DropdownMenuSubContent = styled(DropdownMenu.SubContent, contentStyles);
-
-const DropdownMenuArrow = styled(DropdownMenu.Arrow, { fill: "white" });
 
 const itemStyles = {
   all: "unset",

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Bordes } from "../components/Bordes";
 import { Convolucion } from "../components/Convolucion";
+import { Desplazamiento } from "../components/Desplazamiento";
 import { Foco } from "../components/Foco";
 import Head from "next/head";
 import { Histograma } from "../components/Histograma";
@@ -36,6 +37,7 @@ export default function Home() {
         <div>{toolSelected == "Foco" && <Foco />}</div>
         <div>{toolSelected == "Histograma" && <Histograma />}</div>
         <div>{toolSelected == "Scala" && <Scala />}</div>
+        <div>{toolSelected == "Desplazamiento" && <Desplazamiento />}</div>
       </div>
     </div>
   );
