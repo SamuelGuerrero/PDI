@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 
 import { Button } from "./Button";
+import DropdownMenuMatrix from "./DropdownMenuMatrix";
 import { Input } from "./Input";
 import { NavigationMenuDemo } from "./NavigationMenuDemo";
 
@@ -198,8 +199,11 @@ export const Foco = () => {
         idInput="imagen1"
         selectTool={() => FocoAlgoritm(matrix)}
       />
-      <NavigationMenuDemo FocoAlgoritm={FocoAlgoritm} matrix={matrix} setMatrix={setMatrix} />
-      <div className="container mx-auto flex justify-center pb-10">
+      
+      <div className="absolute top-[100px] left-10 z-0">
+        <DropdownMenuMatrix FocoAlgoritm={FocoAlgoritm} matrix={matrix} setMatrix={setMatrix} />
+      </div>
+      <div className="container mx-auto flex justify-center mt-10 pb-10 ">
         {variants.map((variant, target) => (
           <div
             key={target}

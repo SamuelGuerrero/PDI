@@ -10,6 +10,7 @@ import { NavBar } from "../components/NavBar";
 import { Operadores } from "../components/Operadores";
 import { RGB } from "../components/RGB";
 import { Scala } from "../components/Scala";
+import { Scalar } from "../components/Scalar";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -36,6 +37,7 @@ export default function Home() {
         <div>{toolSelected == "Convolucion" && <Convolucion />}</div>
         <div>{toolSelected == "Foco" && <Foco />}</div>
         <div>{toolSelected == "Histograma" && <Histograma />}</div>
+        <div>{toolSelected == "Scalar" && <Scalar />}</div>
         <div>{toolSelected == "Scala" && <Scala />}</div>
         <div>{toolSelected == "Desplazamiento" && <Desplazamiento />}</div>
       </div>

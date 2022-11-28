@@ -123,15 +123,6 @@ const ConvolutionAlgoritm = (matrix: any) => {
   }
 };
 
-const variants = [
-  {
-    name: "Imágen Original",
-  },
-  {
-    name: "Imágen con Convolución",
-  },
-];
-
 export const Convolucion = () => {
   const [matrix, setMatrix] = useState([0, 0, 0, 0, 1, 0, 0, 0, 0])
 

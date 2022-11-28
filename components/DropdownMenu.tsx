@@ -58,7 +58,6 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             RGB
           </DropdownMenuItem>
           <DropdownMenuItem>Rotar</DropdownMenuItem>
-          <DropdownMenuItem>Scalar</DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
               setMode("Operadores");
@@ -91,6 +90,15 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Histograma
           </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Scalar");
+              localStorage.setItem("toolSelected", "Scalar");
+            }}
+          >
+            Scalar
+          </DropdownMenuItem>
+
           <DropdownMenuItem
             onClick={() => {
               setMode("Scala");
