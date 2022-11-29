@@ -106,7 +106,7 @@ export const HistogramaPixelesRojos = () => {
                                         HistogramaAlgoritm(setChannel, setPixelsRange, pixelsRange.start, i)
                                     }}
                                         style={{ height: (el * 0.5) }}
-                                        className={`w-[5px] border border-black hover:cursor-pointer bottom-0 ${i == pixelsRange.start ? 'bg-red-500' : pixelsRange.end == i ? 'bg-red-500' : 'bg-yellow-400'}`} key={i} />
+                                        className={`w-[5px] hover:w-[15px] border border-black hover:cursor-pointer bottom-0 ${i == pixelsRange.start ? 'bg-red-500' : ((pixelsRange.end >= i) && ((pixelsRange.start <= i))) ? 'bg-red-500' : 'bg-yellow-400'}`} key={i} />
                                 ))}
                             </div>
                         </div>
