@@ -11,6 +11,7 @@ import { Operadores } from "../components/Operadores";
 import { RGB } from "../components/RGB";
 import { Scala } from "../components/Scala";
 import { Scalar } from "../components/Scalar";
+import { HistogramaModificado } from "../components/HistogramaModificado";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -40,6 +41,7 @@ export default function Home() {
         <div>{toolSelected == "Scalar" && <Scalar />}</div>
         <div>{toolSelected == "Scala" && <Scala />}</div>
         <div>{toolSelected == "Desplazamiento" && <Desplazamiento />}</div>
+        <div>{toolSelected == "Histograma Modificado" && <HistogramaModificado />}</div>
       </div>
     </div>
   );

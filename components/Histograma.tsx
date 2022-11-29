@@ -35,18 +35,21 @@ const HistogramaAlgoritm = (setRedChannel: Dispatch<SetStateAction<any[]>>, setG
         var image = new Image() as any;
         image = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
         const pixels = image.data;
+
+        var image2 = new Image() as any;
+        image2 = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+        const respaldo = image2.data;
+
         const numPixels = image.width * image.height;
 
-
         for (i = 0; i < numPixels; i++) {
-            pixels[i * 4] = pixels[i * 4] + desplazamiento
-            pixels[i * 4 + 1] = pixels[i * 4 + 1] + desplazamiento
-            pixels[i * 4 + 2] = pixels[i * 4 + 2] + desplazamiento
+            pixels[i * 4] = (respaldo[i * 4] + desplazamiento) > 255 ? 255 : respaldo[i * 4] + desplazamiento
+            pixels[i * 4 + 1] = (respaldo[i * 4 + 1] + desplazamiento) > 255 ? 255 : respaldo[i * 4 + 1] + desplazamiento
+            pixels[i * 4 + 2] = (respaldo[i * 4 + 2] + desplazamiento) > 255 ? 255 : respaldo[i * 4 + 2] + desplazamiento
         }
         canvas2.width = canvas1.width;
         canvas2.height = canvas1.height;
         ctx2.putImageData(image, 0, 0);
-
 
         for (var i = 0; i < numPixels; i++) {
             redChannelValues[pixels[i * 4]] += 1;
@@ -71,15 +74,6 @@ const HistogramaAlgoritm = (setRedChannel: Dispatch<SetStateAction<any[]>>, setG
         setBlueChannel(blueChannelValues)
     }
 };
-
-const variants = [
-    {
-        name: "Imágen Original",
-    },
-    {
-        name: "Imágen Modificada",
-    },
-];
 
 export const Histograma = () => {
     const [redChannel, setRedChannel] = useState<any[]>([0])

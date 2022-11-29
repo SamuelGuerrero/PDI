@@ -18,8 +18,6 @@ type NavBarProps = {
 
 const DropdownMenuDemo = (props: NavBarProps) => {
   const { setMode } = props;
-  const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
-  const [urlsChecked, setUrlsChecked] = React.useState(false);
 
   return (
     <DropdownMenu.Root>
@@ -89,6 +87,14 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             }}
           >
             Histograma
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Histograma Modificado");
+              localStorage.setItem("toolSelected", "Histograma Modificado");
+            }}
+          >
+            Histograma Modificado
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
