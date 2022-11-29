@@ -6,12 +6,13 @@ import { Desplazamiento } from "../components/Desplazamiento";
 import { Foco } from "../components/Foco";
 import Head from "next/head";
 import { Histograma } from "../components/Histograma";
+import { HistogramaPixelRojo } from "../components/HistogramaPixelRojo";
+import { HistogramaPixelesRojos } from "../components/HistogramaPixelesRojos";
 import { NavBar } from "../components/NavBar";
 import { Operadores } from "../components/Operadores";
 import { RGB } from "../components/RGB";
 import { Scala } from "../components/Scala";
 import { Scalar } from "../components/Scalar";
-import { HistogramaModificado } from "../components/HistogramaModificado";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -41,7 +42,8 @@ export default function Home() {
         <div>{toolSelected == "Scalar" && <Scalar />}</div>
         <div>{toolSelected == "Scala" && <Scala />}</div>
         <div>{toolSelected == "Desplazamiento" && <Desplazamiento />}</div>
-        <div>{toolSelected == "Histograma Modificado" && <HistogramaModificado />}</div>
+        <div>{toolSelected == "Histograma Pixel Rojo" && <HistogramaPixelRojo />}</div>
+        <div>{toolSelected == "Histograma Pixeles Rojos" && <HistogramaPixelesRojos />}</div>
       </div>
     </div>
   );

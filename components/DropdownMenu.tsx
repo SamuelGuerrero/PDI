@@ -90,11 +90,19 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              setMode("Histograma Modificado");
-              localStorage.setItem("toolSelected", "Histograma Modificado");
+              setMode("Histograma Pixel Rojo");
+              localStorage.setItem("toolSelected", "Histograma Pixel Rojo");
             }}
           >
-            Histograma Modificado
+            Histograma Pixel Rojo
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Histograma Pixeles Rojos");
+              localStorage.setItem("toolSelected", "Histograma Pixeles Rojos");
+            }}
+          >
+            Histograma Pixeles Rojos
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
