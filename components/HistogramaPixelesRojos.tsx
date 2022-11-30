@@ -35,9 +35,6 @@ const HistogramaAlgoritm = (setChannel: Dispatch<SetStateAction<any[]>>,
     function histograma() {
         var channelValues = new Array(256).fill(0)
 
-        console.log(initialPoint, endPoint)
-
-
         var image = new Image() as any;
         image = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
         const pixels = image.data;
@@ -48,7 +45,6 @@ const HistogramaAlgoritm = (setChannel: Dispatch<SetStateAction<any[]>>,
 
         var changePixels = []
 
-
         for (var i = 0; i < numPixels; i++) {
             if ((pixels[i * 4] >= initialPoint) && (pixels[i * 4] <= endPoint))
                 changePixels.push(i)
@@ -56,7 +52,6 @@ const HistogramaAlgoritm = (setChannel: Dispatch<SetStateAction<any[]>>,
         }
 
         var maxPixel = Math.max(...channelValues)
-
 
         for (i = 0; i < channelValues.length; i++) {
             channelValues[i] = Math.trunc((channelValues[i] * 400) / maxPixel)
