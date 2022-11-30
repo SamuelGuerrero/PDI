@@ -106,6 +106,14 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
+              setMode("Histograma Coloreado");
+              localStorage.setItem("toolSelected", "Histograma Coloreado");
+            }}
+          >
+            Histograma Coloreado
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
               setMode("Scalar");
               localStorage.setItem("toolSelected", "Scalar");
             }}
