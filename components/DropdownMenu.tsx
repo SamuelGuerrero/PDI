@@ -114,6 +114,14 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
+              setMode("Histograma Frecuencia Acumulada");
+              localStorage.setItem("toolSelected", "Histograma Frecuencia Acumulada");
+            }}
+          >
+            Histograma Frecuencia Acumulada
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
               setMode("Scalar");
               localStorage.setItem("toolSelected", "Scalar");
             }}

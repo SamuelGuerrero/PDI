@@ -7,12 +7,13 @@ import { Foco } from "../components/Foco";
 import { Histograma } from "../components/Histograma";
 import { HistogramaPixelRojo } from "../components/HistogramaPixelRojo";
 import { HistogramaPixelesRojos } from "../components/HistogramaPixelesRojos";
+import { HistogramaColoreado } from "../components/HistogramaColoreado";
+import { HistogramaFrecuenciaAcumulada } from "../components/HistogramaFrecuenciaAcumulada";
 import { NavBar } from "../components/NavBar";
 import { Operadores } from "../components/Operadores";
 import { RGB } from "../components/RGB";
 import { Scala } from "../components/Scala";
 import { Scalar } from "../components/Scalar";
-import { HistogramaColoreado } from "../components/HistogramaColoreado";
 
 import Head from "next/head";
 
@@ -47,6 +48,7 @@ export default function Home() {
         <div>{toolSelected == "Histograma Pixel Rojo" && <HistogramaPixelRojo />}</div>
         <div>{toolSelected == "Histograma Pixeles Rojos" && <HistogramaPixelesRojos />}</div>
         <div>{toolSelected == "Histograma Coloreado" && <HistogramaColoreado />}</div>
+        <div>{toolSelected == "Histograma Frecuencia Acumulada" && <HistogramaFrecuenciaAcumulada />}</div>
       </div>
     </div>
   );
