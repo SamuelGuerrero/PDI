@@ -53,9 +53,8 @@ const HistogramaAlgoritm = (setChannel: Dispatch<SetStateAction<any[]>>,
 
         var maxPixel = Math.max(...channelValues)
 
-        for (i = 0; i < channelValues.length; i++) {
+        for (i = 0; i < channelValues.length; i++)
             channelValues[i] = Math.trunc((channelValues[i] * 400) / maxPixel)
-        }
 
         setChannel(channelValues)
 

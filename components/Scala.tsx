@@ -6,7 +6,6 @@ const ScalaAlgoritm = (scala: number) => {
         "canvasImagen1"
     ) as HTMLCanvasElement | null;
 
-
     var image1 = new Image();
     var imagen1 = document.getElementById("imagen1") as HTMLInputElement;
 
@@ -20,7 +19,6 @@ const ScalaAlgoritm = (scala: number) => {
         ctx1.drawImage(image1, 0, 0);
         Scala();
     };
-
 
     function Scala() {
         var image = new Image() as any;
