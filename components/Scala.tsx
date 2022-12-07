@@ -56,7 +56,6 @@ export const Scala = () => {
     return (
         <div className="h-screen">
             <Input idInput="imagen1" selectTool={() => ScalaAlgoritm(0)} />
-
             <div className="w-full flex flex-col items-center space-y-4">
                 <div>
                     <input className="w-[400px]" type={"range"} min={0} max={4} defaultValue={0} onChange={(e) => ScalaAlgoritm(parseInt(e.target.value))} />

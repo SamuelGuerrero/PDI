@@ -132,8 +132,6 @@ export const HistogramaColoreado = () => {
 
                 <ImageCard variantName={"Imagen"} target={1} />
             </div>
-
-
             {
                 redChannel.length > 1 && (
                     <div className="w-full flex flex-col items-center space-y-2 pb-5">
