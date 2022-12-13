@@ -24,7 +24,10 @@ const BordesAplicados = () => {
   var ctx4 = canvas4?.getContext("2d");
 
   var curFile = imagen1.files;
-  var source = curFile[0].name;
+
+  if (!curFile.length) {
+    return;
+  }
   image1.src = window.URL.createObjectURL(curFile[0]);
   image1.onload = function () {
     canvas1.width = image1.width;

@@ -120,6 +120,7 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Histograma Frecuencia Acumulada
           </DropdownMenuItem>
+          
           <DropdownMenuItem
             onClick={() => {
               setMode("Scalar");

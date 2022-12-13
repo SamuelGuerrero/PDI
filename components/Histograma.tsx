@@ -18,6 +18,10 @@ const HistogramaAlgoritm = (setRedChannel: Dispatch<SetStateAction<any[]>>, setG
     var ctx2 = canvas2?.getContext("2d");
 
     var curFile = imagen1.files;
+
+    if (!curFile.length) {
+      return;
+    }
     image1.src = window.URL.createObjectURL(curFile[0]);
     image1.onload = function () {
         canvas1.width = image1.width;
@@ -27,7 +31,6 @@ const HistogramaAlgoritm = (setRedChannel: Dispatch<SetStateAction<any[]>>, setG
     };
 
     function histograma() {
-
         var redChannelValues = new Array(256).fill(0)
         var greenChannelValues = new Array(256).fill(0)
         var blueChannelValues = new Array(256).fill(0)

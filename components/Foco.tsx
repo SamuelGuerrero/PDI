@@ -23,6 +23,10 @@ const FocoAlgoritm = (matrix: any) => {
   canvas1.addEventListener("mousemove", manejadorRaton, false);
 
   var curFile = imagen1.files;
+
+  if (!curFile.length) {
+    return;
+  }
   image1.src = window.URL.createObjectURL(curFile[0]);
   image1.onload = function () {
     canvas1.width = image1.width;

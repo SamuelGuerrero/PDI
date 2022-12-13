@@ -23,6 +23,10 @@ const DesplazamientoAlgoritm = (imageDimension: {
     var ctx1 = canvas1?.getContext("2d");
 
     var curFile = imagen1.files;
+
+    if (!curFile.length) {
+      return;
+    }
     image1.src = window.URL.createObjectURL(curFile[0]);
     image1.onload = function () {
         canvas1.width = image1.width;

@@ -4,6 +4,7 @@ import { Bordes } from "../components/Bordes";
 import { Convolucion } from "../components/Convolucion";
 import { Desplazamiento } from "../components/Desplazamiento";
 import { Foco } from "../components/Foco";
+import { FrecuenciaAcumulada } from "../components/FrecuenciaAcumulada";
 import Head from "next/head";
 import { Histograma } from "../components/Histograma";
 import { HistogramaColoreado } from "../components/HistogramaColoreado";
@@ -48,8 +49,8 @@ export default function Home() {
         <div>{toolSelected == "Histograma Pixel Rojo" && <HistogramaPixelRojo />}</div>
         <div>{toolSelected == "Histograma Pixeles Rojos" && <HistogramaPixelesRojos />}</div>
         <div>{toolSelected == "Histograma Coloreado" && <HistogramaColoreado />}</div>
-        <div>{toolSelected == "Histograma Frecuencia Acumulada" && <HistogramaFrecuenciaAcumulada />}</div>
         <div>{toolSelected == "Rotacion" && <Rotacion />}</div>
+        <div>{toolSelected == "Histograma Frecuencia Acumulada" && <FrecuenciaAcumulada />}</div>
       </div>
     </div>
   );

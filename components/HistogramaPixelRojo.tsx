@@ -18,6 +18,10 @@ const HistogramaAlgoritm = (setChannel: Dispatch<SetStateAction<any[]>>, redPixe
     var ctx2 = canvas2?.getContext("2d");
 
     var curFile = imagen1.files;
+
+    if (!curFile.length) {
+      return;
+    }
     image1.src = window.URL.createObjectURL(curFile[0]);
     image1.onload = function () {
         canvas1.width = image1.width;
