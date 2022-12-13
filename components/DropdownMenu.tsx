@@ -137,6 +137,15 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Scala
           </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Rotacion");
+              localStorage.setItem("toolSelected", "Rotacion");
+            }}
+          >
+            Rotacion
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

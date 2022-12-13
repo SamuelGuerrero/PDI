@@ -140,7 +140,7 @@ export const Convolucion = () => {
       </div>
 
 
-      <div className="container mx-auto flex justify-center absolute top-[150px]">
+      <div className="container mx-auto flex justify-center">
         <div className="hidden w-0 h-0">
           <ImageCard variantName={'Imágen Original'} target={0} />
         </div>

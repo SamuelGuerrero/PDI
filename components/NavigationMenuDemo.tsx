@@ -66,6 +66,7 @@ export const NavigationMenuDemo = (props: NavigationMenuDemoProps) => {
                                             key={i}
                                             type="number"
                                             defaultValue={e}
+                                            onChange={() => console.log(i)}
                                             className={`bg-transparent text-center h-[50px] w-[50px] border ${i == 0 ? 'rounded-tl-xl' : (i == 2 ? 'rounded-tr-xl' : (i == 6 ? 'rounded-bl-xl' : (i == 8 ? 'rounded-br-xl' : null)))}`}
                                         />
                                     ))
@@ -74,6 +75,7 @@ export const NavigationMenuDemo = (props: NavigationMenuDemoProps) => {
 
                             <Button
                                 onClick={() => {
+                                    console.log(pings)
                                     const valores = pings.current.map((e: any) => e.value);
                                     var isAnyElementEmpty = false;
                                     var list = [];

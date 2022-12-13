@@ -4,18 +4,18 @@ import { Bordes } from "../components/Bordes";
 import { Convolucion } from "../components/Convolucion";
 import { Desplazamiento } from "../components/Desplazamiento";
 import { Foco } from "../components/Foco";
+import Head from "next/head";
 import { Histograma } from "../components/Histograma";
-import { HistogramaPixelRojo } from "../components/HistogramaPixelRojo";
-import { HistogramaPixelesRojos } from "../components/HistogramaPixelesRojos";
 import { HistogramaColoreado } from "../components/HistogramaColoreado";
 import { HistogramaFrecuenciaAcumulada } from "../components/HistogramaFrecuenciaAcumulada";
+import { HistogramaPixelRojo } from "../components/HistogramaPixelRojo";
+import { HistogramaPixelesRojos } from "../components/HistogramaPixelesRojos";
 import { NavBar } from "../components/NavBar";
 import { Operadores } from "../components/Operadores";
 import { RGB } from "../components/RGB";
+import { Rotacion } from "../components/Rotacion";
 import { Scala } from "../components/Scala";
 import { Scalar } from "../components/Scalar";
-
-import Head from "next/head";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -49,6 +49,7 @@ export default function Home() {
         <div>{toolSelected == "Histograma Pixeles Rojos" && <HistogramaPixelesRojos />}</div>
         <div>{toolSelected == "Histograma Coloreado" && <HistogramaColoreado />}</div>
         <div>{toolSelected == "Histograma Frecuencia Acumulada" && <HistogramaFrecuenciaAcumulada />}</div>
+        <div>{toolSelected == "Rotacion" && <Rotacion />}</div>
       </div>
     </div>
   );
