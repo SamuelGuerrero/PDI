@@ -1,9 +1,7 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useState } from "react";
 
-import { Button } from "./Button";
 import DropdownMenuMatrix from "./DropdownMenuMatrix";
 import { Input } from "./Input";
-import { NavigationMenuDemo } from "./NavigationMenuDemo";
 
 const FocoAlgoritm = (matrix: any) => {
   var canvas1 = document.getElementById(

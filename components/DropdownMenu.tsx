@@ -45,7 +45,7 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             }}
           >
             Desplazamiento
-          </DropdownMenuItem>  
+          </DropdownMenuItem>
 
           <DropdownMenuItem
             onClick={() => {
@@ -120,7 +120,7 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Histograma Frecuencia Acumulada
           </DropdownMenuItem>
-          
+
           <DropdownMenuItem
             onClick={() => {
               setMode("Scalar");
@@ -146,6 +146,15 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             }}
           >
             Rotacion
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Segmentacion");
+              localStorage.setItem("toolSelected", "Segmentacion");
+            }}
+          >
+            Segmentacion
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
