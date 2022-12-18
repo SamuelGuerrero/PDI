@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ImageCard } from "./ImageCard";
 import { Input } from "./Input";
 
-const SegmentacionAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
+const SegmentacionEuclideanaAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
     R: number;
     G: number;
     B: number;
@@ -54,21 +54,22 @@ const SegmentacionAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
         setRgbPixel({ R: pixels[iAux], G: pixels[iAux + 1], B: pixels[iAux + 2] })
 
         for (var i = 0; i < numPixels; i++) {
-            var resR = Math.abs(pixels[i * 4] - pixels[iAux])
-            var resG = Math.abs(pixels[i * 4 + 1] - pixels[iAux + 1])
-            var resB = Math.abs(pixels[i * 4 + 2] - pixels[iAux + 2])
+            var resR = Math.pow((pixels[i * 4] - pixels[iAux]), 2)
+            var resG = Math.pow((pixels[i * 4 + 1] - pixels[iAux + 1]), 2)
+            var resB = Math.pow((pixels[i * 4 + 2] - pixels[iAux + 2]), 2)
 
             var sum = resR + resG + resB
 
-            if (sum <= threshold) {
+            if (Math.sqrt(sum) <= threshold) {
                 pixels[i * 4] = pixels[i * 4]
                 pixels[i * 4 + 1] = pixels[i * 4 + 1]
                 pixels[i * 4 + 2] = pixels[i * 4 + 2]
             }
             else {
-                pixels[i * 4] = pixels[i * 4 + 1] = pixels[i * 4 + 2] = sum / 3
+                pixels[i * 4] = sum / 3
+                pixels[i * 4 + 1] = sum / 3
+                pixels[i * 4 + 2] = sum / 3
             }
-
         }
         console.log(numPixels, i)
 
@@ -96,18 +97,18 @@ const variants = [
     },
 ];
 
-export const Segmentacion = () => {
+export const SegmentacionEuclideana = () => {
     const [rgbPixel, setRgbPixel] = useState({ R: 0, G: 0, B: 0 })
     const [pixelSelected, setPixelSelected] = useState({ X: 0, Y: 0 })
 
     return (
         <div>
-            <Input idInput="imagen1" selectTool={() => SegmentacionAlgoritm(setRgbPixel, 100, setPixelSelected)} />
+            <Input idInput="imagen1" selectTool={() => SegmentacionEuclideanaAlgoritm(setRgbPixel, 100, setPixelSelected)} />
 
             <div className="w-10 h-10 border border-black mx-auto" style={{ background: `rgb(${rgbPixel.R + ',' + rgbPixel.G + ',' + rgbPixel.B})` }} />
 
             {/* <div className="w-full flex justify-center mb-4">
-                <input className="w-[400px]" type={'range'} min={0} max={100} defaultValue={0} onChange={(e) => SegmentacionAlgoritm(setRgbPixel, parseInt(e.target.value))}/>
+                <input className="w-[400px]" type={'range'} min={0} max={100} defaultValue={0} onChange={(e) => SegmentacionEuclideanaAlgoritm(setRgbPixel, parseInt(e.target.value))}/>
             </div> */}
 
             <div className="container flex flex-col items-center space-y-5 mx-auto">

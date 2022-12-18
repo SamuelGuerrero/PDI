@@ -18,6 +18,7 @@ import { Rotacion } from "../components/Rotacion";
 import { Scala } from "../components/Scala";
 import { Scalar } from "../components/Scalar";
 import { Segmentacion } from "../components/Segmentacion";
+import { SegmentacionEuclideana } from "../components/SegmentacionEuclideana";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -53,6 +54,7 @@ export default function Home() {
         <div>{toolSelected == "Rotacion" && <Rotacion />}</div>
         <div>{toolSelected == "Histograma Frecuencia Acumulada" && <FrecuenciaAcumulada />}</div>
         <div>{toolSelected == "Segmentacion" && <Segmentacion />}</div>
+        <div>{toolSelected == "Segmentacion Euclideana" && <SegmentacionEuclideana />}</div>
       </div>
     </div>
   );

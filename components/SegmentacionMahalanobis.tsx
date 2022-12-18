@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ImageCard } from "./ImageCard";
 import { Input } from "./Input";
 
-const SegmentacionAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
+const SegmentacionMahalanobisAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
     R: number;
     G: number;
     B: number;
@@ -60,13 +60,15 @@ const SegmentacionAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
 
             var sum = resR + resG + resB
 
-            if (sum <= threshold) {
-                pixels[i * 4] = pixels[i * 4]
-                pixels[i * 4 + 1] = pixels[i * 4 + 1]
-                pixels[i * 4 + 2] = pixels[i * 4 + 2]
+            if (sum >= threshold) {
+                pixels[i * 4] = 0
+                pixels[i * 4 + 1] = 0
+                pixels[i * 4 + 2] = 0
             }
             else {
-                pixels[i * 4] = pixels[i * 4 + 1] = pixels[i * 4 + 2] = sum / 3
+                pixels[i * 4] = 255
+                pixels[i * 4 + 1] = 255
+                pixels[i * 4 + 2] = 255
             }
 
         }
@@ -92,23 +94,19 @@ const variants = [
         name: "Imágen Original",
     },
     {
-        name: "Canal Azúl",
+        name: "Imágen segmentada",
     },
 ];
 
-export const Segmentacion = () => {
+export const SegmentacionMahalanobis = () => {
     const [rgbPixel, setRgbPixel] = useState({ R: 0, G: 0, B: 0 })
     const [pixelSelected, setPixelSelected] = useState({ X: 0, Y: 0 })
 
     return (
         <div>
-            <Input idInput="imagen1" selectTool={() => SegmentacionAlgoritm(setRgbPixel, 100, setPixelSelected)} />
+            <Input idInput="imagen1" selectTool={() => SegmentacionMahalanobisAlgoritm(setRgbPixel, 100, setPixelSelected)} />
 
             <div className="w-10 h-10 border border-black mx-auto" style={{ background: `rgb(${rgbPixel.R + ',' + rgbPixel.G + ',' + rgbPixel.B})` }} />
-
-            {/* <div className="w-full flex justify-center mb-4">
-                <input className="w-[400px]" type={'range'} min={0} max={100} defaultValue={0} onChange={(e) => SegmentacionAlgoritm(setRgbPixel, parseInt(e.target.value))}/>
-            </div> */}
 
             <div className="container flex flex-col items-center space-y-5 mx-auto">
                 {variants.map((variant, target) => (

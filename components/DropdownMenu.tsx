@@ -156,6 +156,15 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Segmentacion
           </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Segmentacion Euclideana");
+              localStorage.setItem("toolSelected", "Segmentacion Euclideana");
+            }}
+          >
+            Segmentacion Euclideana
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
