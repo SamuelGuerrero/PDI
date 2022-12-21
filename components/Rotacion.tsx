@@ -25,7 +25,6 @@ const RotacionAlgoritm = (grados: number) => {
         rotacion(grados)
     };
 
-
     function rotacion(grados) {
         var image2 = new Image() as any;
         image2 = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);

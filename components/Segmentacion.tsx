@@ -48,6 +48,7 @@ const SegmentacionAlgoritm = (setRgbPixel: Dispatch<SetStateAction<{
         const numPixels = image.width * image.height;
 
         console.log(threshold)
+        
 
         const iAux = ((relativeY * (image.width * 4)) + (relativeX * 4))
 
