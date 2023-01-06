@@ -93,7 +93,7 @@ const variants = [
         name: "Imágen Original",
     },
     {
-        name: "Canal Azúl",
+        name: "Resultado",
     },
 ];
 
