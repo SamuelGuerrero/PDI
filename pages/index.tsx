@@ -8,7 +8,6 @@ import { FrecuenciaAcumulada } from "../components/FrecuenciaAcumulada";
 import Head from "next/head";
 import { Histograma } from "../components/Histograma";
 import { HistogramaColoreado } from "../components/HistogramaColoreado";
-import { HistogramaFrecuenciaAcumulada } from "../components/HistogramaFrecuenciaAcumulada";
 import { HistogramaPixelRojo } from "../components/HistogramaPixelRojo";
 import { HistogramaPixelesRojos } from "../components/HistogramaPixelesRojos";
 import { NavBar } from "../components/NavBar";
@@ -19,6 +18,7 @@ import { Scala } from "../components/Scala";
 import { Scalar } from "../components/Scalar";
 import { Segmentacion } from "../components/Segmentacion";
 import { SegmentacionEuclideana } from "../components/SegmentacionEuclideana";
+import { SegmentacionMahalanobis } from "../components/SegmentacionMahalanobis";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -55,6 +55,7 @@ export default function Home() {
         <div>{toolSelected == "Histograma Frecuencia Acumulada" && <FrecuenciaAcumulada />}</div>
         <div>{toolSelected == "Segmentacion" && <Segmentacion />}</div>
         <div>{toolSelected == "Segmentacion Euclideana" && <SegmentacionEuclideana />}</div>
+        <div>{toolSelected == "Segmentacion Mahalanobis" && <SegmentacionMahalanobis />}</div>
       </div>
     </div>
   );

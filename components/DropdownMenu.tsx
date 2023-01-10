@@ -165,6 +165,15 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           >
             Segmentacion Euclideana
           </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Segmentacion Mahalanobis");
+              localStorage.setItem("toolSelected", "Segmentacion Mahalanobis");
+            }}
+          >
+            Segmentacion Mahalanobis
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
