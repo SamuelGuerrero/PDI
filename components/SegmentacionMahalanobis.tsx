@@ -17,6 +17,18 @@ const SegmentacionMahalanobisAlgoritm = (
       X: number;
       Y: number;
     }>
+  >,
+  totalClicks: number,
+  setTotalClicks: Dispatch<SetStateAction<number>>,
+  coordenates: {
+    x1: number;
+    y1: number;
+  },
+  setCoordenates: Dispatch<
+    SetStateAction<{
+      x1: number;
+      y1: number;
+    }>
   >
 ) => {
   var canvas1 = document.getElementById(
@@ -39,6 +51,8 @@ const SegmentacionMahalanobisAlgoritm = (
   }
   image1.src = window.URL.createObjectURL(curFile[0]);
 
+  setTotalClicks(totalClicks + 1);
+  // console.log(totalClicks);
   canvas1.addEventListener("click", manejadorRaton, false);
   image1.onload = function () {
     canvas1.width = image1.width;
@@ -53,30 +67,33 @@ const SegmentacionMahalanobisAlgoritm = (
     const pixels = image.data;
     const numPixels = image.width * image.height;
 
-    console.log(threshold);
+    //Aquí se pueden checar las coordenadas.
 
-    const iAux = relativeY * (image.width * 4) + relativeX * 4;
-
-    setRgbPixel({ R: pixels[iAux], G: pixels[iAux + 1], B: pixels[iAux + 2] });
-
-    for (var i = 0; i < numPixels; i++) {
-      var resR = Math.abs(pixels[i * 4] - pixels[iAux]);
-      var resG = Math.abs(pixels[i * 4 + 1] - pixels[iAux + 1]);
-      var resB = Math.abs(pixels[i * 4 + 2] - pixels[iAux + 2]);
-
-      var sum = resR + resG + resB;
-
-      if (sum >= threshold) {
-        pixels[i * 4] = 0;
-        pixels[i * 4 + 1] = 0;
-        pixels[i * 4 + 2] = 0;
+    if (coordenates.y1 < relativeY) {
+      if (coordenates.x1 < relativeX) {
+        var initialPoint = { x: coordenates.x1, y: coordenates.y1 };
+        var endPoint = { x: relativeX, y: relativeY };
       } else {
-        pixels[i * 4] = 255;
-        pixels[i * 4 + 1] = 255;
-        pixels[i * 4 + 2] = 255;
+        var initialPoint = { x: relativeX, y: coordenates.y1 };
+        var endPoint = { x: coordenates.x1, y: relativeY };
+      }
+    } else {
+      if (relativeX < coordenates.x1) {
+        var initialPoint = { x: relativeX, y: relativeY };
+        var endPoint = { x: coordenates.x1, y: coordenates.y1 };
+      } else {
+        var initialPoint = { x: coordenates.x1, y: relativeY };
+        var endPoint = { x: relativeX, y: coordenates.y1 };
       }
     }
-    console.log(numPixels, i);
+
+    var heightArea = 
+
+    console.log(initialPoint);
+    console.log(endPoint);
+    setTotalClicks(0);
+
+    for (var i = 0; i < numPixels; i++) {}
 
     canvas2.width = image.width;
     canvas2.height = image.height;
@@ -89,7 +106,13 @@ const SegmentacionMahalanobisAlgoritm = (
     var relativeY =
       e.clientY - (canvas1.offsetTop - Math.floor(window.scrollY));
     setPixelSelected({ X: relativeX, Y: relativeY });
-    segmentacion(relativeX, relativeY);
+    if (totalClicks == 0) {
+      setCoordenates({ ...coordenates, x1: relativeX, y1: relativeY });
+    }
+    if (totalClicks == 1) {
+      segmentacion(relativeX, relativeY);
+      setTotalClicks(0);
+    }
   }
 };
 
@@ -105,13 +128,26 @@ const variants = [
 export const SegmentacionMahalanobis = () => {
   const [rgbPixel, setRgbPixel] = useState({ R: 0, G: 0, B: 0 });
   const [pixelSelected, setPixelSelected] = useState({ X: 0, Y: 0 });
+  const [totalClicks, setTotalClicks] = useState(0);
+  const [coordenates, setCoordenates] = useState({
+    x1: 0,
+    y1: 0,
+  });
 
   return (
     <div>
       <Input
         idInput="imagen1"
         selectTool={() =>
-          SegmentacionMahalanobisAlgoritm(setRgbPixel, 100, setPixelSelected)
+          SegmentacionMahalanobisAlgoritm(
+            setRgbPixel,
+            100,
+            setPixelSelected,
+            totalClicks,
+            setTotalClicks,
+            coordenates,
+            setCoordenates
+          )
         }
       />
 
@@ -124,7 +160,20 @@ export const SegmentacionMahalanobis = () => {
         }}
       />
 
-      <div className="container flex flex-col items-center space-y-5 mx-auto">
+      <div
+        onClick={() =>
+          SegmentacionMahalanobisAlgoritm(
+            setRgbPixel,
+            100,
+            setPixelSelected,
+            totalClicks,
+            setTotalClicks,
+            coordenates,
+            setCoordenates
+          )
+        }
+        className="container flex flex-col items-center space-y-5 mx-auto"
+      >
         {variants.map((variant, target) => (
           <ImageCard key={target} variantName={variant.name} target={target} />
         ))}
