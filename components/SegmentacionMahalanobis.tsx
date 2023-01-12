@@ -1,3 +1,4 @@
+import { transpose, zeros, multiply, inv, sqrt, divide } from "mathjs";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { ImageCard } from "./ImageCard";
@@ -67,8 +68,6 @@ const SegmentacionMahalanobisAlgoritm = (
     const pixels = image.data;
     const numPixels = image.width * image.height;
 
-    //Aquí se pueden checar las coordenadas.
-
     if (coordenates.y1 < relativeY) {
       if (coordenates.x1 < relativeX) {
         var initialPoint = { x: coordenates.x1, y: coordenates.y1 };
@@ -87,13 +86,114 @@ const SegmentacionMahalanobisAlgoritm = (
       }
     }
 
-    var heightArea = 
-
     console.log(initialPoint);
     console.log(endPoint);
     setTotalClicks(0);
 
-    for (var i = 0; i < numPixels; i++) {}
+    var i = initialPoint.y * image.width + initialPoint.x;
+    var areaWidth = endPoint.x - initialPoint.x;
+    var areaHeigth = endPoint.y - initialPoint.y;
+
+    var sumB = 0;
+    var sumG = 0;
+    var sumR = 0;
+
+    var totalPixels = 0;
+
+    for (; i < numPixels; i++) {
+      if (i % image.width < endPoint.x) {
+        sumB = sumB + pixels[i * 4];
+        sumG = sumG + pixels[i * 4 + 1];
+        sumR = sumR + pixels[i * 4 + 2];
+
+        totalPixels++;
+      } else {
+        i = i + image.width - areaWidth;
+      }
+      if (i / image.height == endPoint.y) break;
+    }
+
+    var meanB = sumB / totalPixels;
+    var meanG = sumG / totalPixels;
+    var meanR = sumR / totalPixels;
+
+    var matrix = zeros([areaHeigth * areaWidth, 3]);
+
+    console.log(matrix);
+
+    matrix[0][0] = 20;
+
+    console.log(matrix[0][0]);
+
+    var i = initialPoint.y * image.width + initialPoint.x;
+
+    var row = 0;
+
+    var i0 = 0;
+    var i1 = 1;
+    var i2 = 2;
+
+    console.log(areaHeigth);
+
+    for (; i < numPixels; i++) {
+      if (i % image.width < endPoint.x) {
+        console.log(row);
+        matrix[row][i0] = pixels[i * 4] - meanB;
+        matrix[row][i1] = pixels[i * 4 + 1] - meanG;
+        matrix[row][i2] = pixels[i * 4 + 2] - meanR;
+
+        if (row == areaHeigth) break;
+
+        row++;
+      } else {
+        i = i + image.width - areaWidth;
+      }
+      if (i / image.height == endPoint.y) break;
+    }
+
+    var transposeMatrix = transpose(matrix);
+
+    console.log(transposeMatrix);
+    console.log(matrix);
+
+    var productMatrix = multiply(transposeMatrix, matrix);
+
+    console.log(productMatrix);
+
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        productMatrix[i][j] = productMatrix[i][j] / (totalPixels - 1);
+      }
+    }
+
+    var invMatrix = inv(productMatrix);
+
+    console.log(invMatrix);
+
+    for (i = 0; i < numPixels; i++) {
+      var diference = zeros([1, 3]);
+
+      diference[0] = pixels[i * 4] - meanB;
+      diference[1] = pixels[i * 4 + 1] - meanG;
+      diference[2] = pixels[i * 4 + 2] - meanR;
+
+      var sum1T = transpose(diference);
+      var product1 = multiply(sum1T, invMatrix);
+      var product2 = multiply(product1, diference);
+
+      var result = sqrt(product2);
+
+      if (result <= threshold) {
+        pixels[i * 4] = pixels[i * 4];
+        pixels[i * 4 + 1] = pixels[i * 4 + 1];
+        pixels[i * 4 + 2] = pixels[i * 4 + 2];
+      } else {
+        var gray = (pixels[i * 4] + pixels[i * 4 + 1] + pixels[i * 4 + 2]) / 3;
+        pixels[i * 4] = gray;
+        pixels[i * 4 + 1] = gray;
+        pixels[i * 4 + 2] = gray;
+      }
+    }
 
     canvas2.width = image.width;
     canvas2.height = image.height;
@@ -152,7 +252,7 @@ export const SegmentacionMahalanobis = () => {
       />
 
       <div
-        className="w-10 h-10 border border-black mx-auto"
+        className="w-10 mb-10 h-10 border border-black mx-auto"
         style={{
           background: `rgb(${
             rgbPixel.R + "," + rgbPixel.G + "," + rgbPixel.B
