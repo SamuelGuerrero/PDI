@@ -1,4 +1,4 @@
-import { transpose, zeros, multiply, inv, sqrt, divide } from "mathjs";
+import { transpose, zeros, multiply, inv, sqrt } from "mathjs";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { ImageCard } from "./ImageCard";
@@ -13,12 +13,6 @@ const SegmentacionMahalanobisAlgoritm = (
     }>
   >,
   threshold: number,
-  setPixelSelected: Dispatch<
-    SetStateAction<{
-      X: number;
-      Y: number;
-    }>
-  >,
   totalClicks: number,
   setTotalClicks: Dispatch<SetStateAction<number>>,
   coordenates: {
@@ -88,7 +82,6 @@ const SegmentacionMahalanobisAlgoritm = (
 
     console.log(initialPoint);
     console.log(endPoint);
-    setTotalClicks(0);
 
     var i = initialPoint.y * image.width + initialPoint.x;
     var areaWidth = endPoint.x - initialPoint.x;
@@ -195,6 +188,9 @@ const SegmentacionMahalanobisAlgoritm = (
       }
     }
 
+    setTotalClicks(0);
+    setCoordenates({ x1: 0, y1: 0 });
+
     canvas2.width = image.width;
     canvas2.height = image.height;
     ctx2.putImageData(image, 0, 4);
@@ -205,7 +201,6 @@ const SegmentacionMahalanobisAlgoritm = (
       e.clientX - (canvas1.offsetLeft - Math.floor(window.scrollX));
     var relativeY =
       e.clientY - (canvas1.offsetTop - Math.floor(window.scrollY));
-    setPixelSelected({ X: relativeX, Y: relativeY });
     if (totalClicks == 0) {
       setCoordenates({ ...coordenates, x1: relativeX, y1: relativeY });
     }
@@ -242,7 +237,6 @@ export const SegmentacionMahalanobis = () => {
           SegmentacionMahalanobisAlgoritm(
             setRgbPixel,
             100,
-            setPixelSelected,
             totalClicks,
             setTotalClicks,
             coordenates,
@@ -265,7 +259,6 @@ export const SegmentacionMahalanobis = () => {
           SegmentacionMahalanobisAlgoritm(
             setRgbPixel,
             100,
-            setPixelSelected,
             totalClicks,
             setTotalClicks,
             coordenates,
