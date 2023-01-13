@@ -115,7 +115,10 @@ const DropdownMenuDemo = (props: NavBarProps) => {
           <DropdownMenuItem
             onClick={() => {
               setMode("Histograma Frecuencia Acumulada");
-              localStorage.setItem("toolSelected", "Histograma Frecuencia Acumulada");
+              localStorage.setItem(
+                "toolSelected",
+                "Histograma Frecuencia Acumulada"
+              );
             }}
           >
             Histograma Frecuencia Acumulada
@@ -173,6 +176,15 @@ const DropdownMenuDemo = (props: NavBarProps) => {
             }}
           >
             Segmentacion Mahalanobis
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Erosion");
+              localStorage.setItem("toolSelected", "Erosion");
+            }}
+          >
+            Erosion
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
@@ -267,7 +279,6 @@ const DropdownMenuSeparator = styled(DropdownMenu.Separator, {
   backgroundColor: "#d14334",
   margin: 5,
 });
-
 
 const RightSlot = styled("div", {
   marginLeft: "auto",

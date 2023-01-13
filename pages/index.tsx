@@ -19,6 +19,7 @@ import { Scalar } from "../components/Scalar";
 import { Segmentacion } from "../components/Segmentacion";
 import { SegmentacionEuclideana } from "../components/SegmentacionEuclideana";
 import { SegmentacionMahalanobis } from "../components/SegmentacionMahalanobis";
+import { Erosion } from "../components/Erosion";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -56,6 +57,7 @@ export default function Home() {
         <div>{toolSelected == "Segmentacion" && <Segmentacion />}</div>
         <div>{toolSelected == "Segmentacion Euclideana" && <SegmentacionEuclideana />}</div>
         <div>{toolSelected == "Segmentacion Mahalanobis" && <SegmentacionMahalanobis />}</div>
+        <div>{toolSelected == "Erosion" && <Erosion />}</div>
       </div>
     </div>
   );
