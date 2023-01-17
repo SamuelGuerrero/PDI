@@ -1,7 +1,6 @@
 import { transpose, zeros, multiply, inv, sqrt } from "mathjs";
 import { Dispatch, SetStateAction, useState } from "react";
 
-import { ImageCard } from "./ImageCard";
 import { Input } from "./Input";
 
 const SegmentacionMahalanobisAlgoritm = (
@@ -57,6 +56,8 @@ const SegmentacionMahalanobisAlgoritm = (
   };
 
   function segmentacion(relativeX: number, relativeY: number) {
+    var start = Date.now();
+
     var image = new Image() as any;
     image = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
     const pixels = image.data;
@@ -194,6 +195,10 @@ const SegmentacionMahalanobisAlgoritm = (
     canvas2.width = image.width;
     canvas2.height = image.height;
     ctx2.putImageData(image, 0, 4);
+
+    var end = Date.now();
+    var totalTime = (end - start) / 1000;
+    console.log("El tiempo en ejecucion fue de: ", totalTime);
   }
 
   function manejadorRaton(e) {
@@ -267,9 +272,8 @@ export const SegmentacionMahalanobis = () => {
         }
         className="container flex flex-col items-center space-y-5 mx-auto"
       >
-        {variants.map((variant, target) => (
-          <ImageCard key={target} variantName={variant.name} target={target} />
-        ))}
+        <canvas className="rounded-md" id={"canvasImagen1"}></canvas>
+        <canvas className="rounded-md" id={"canvasImagen2"}></canvas>
       </div>
     </div>
   );
