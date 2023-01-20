@@ -23,7 +23,7 @@ import { Dilatacion } from "../components/Dilatacion";
 import { Erosion } from "../components/Erosion";
 import { Esqueleto } from "../components/Esqueleto";
 import { Relleno } from "../components/Relleno";
-import { ErosionDilatacion } from "../components/ErosionDilatacion";
+import { Limpieza } from "../components/Limpieza";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -65,7 +65,7 @@ export default function Home() {
         <div>{toolSelected == "Erosion" && <Erosion />}</div>
         <div>{toolSelected == "Esqueleto" && <Esqueleto />}</div>
         <div>{toolSelected == "Relleno" && <Relleno />}</div>
-        <div>{toolSelected == "ErosionDilatacion" && <ErosionDilatacion />}</div>
+        <div>{toolSelected == "Limpieza" && <Limpieza />}</div>
       </div>
     </div>
   );
