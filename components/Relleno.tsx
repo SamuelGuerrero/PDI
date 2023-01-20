@@ -90,7 +90,7 @@ export const Relleno = () => {
         }}
       />
 
-      <div className="container mx-auto flex justify-center">
+      <div className="container mx-auto space-x-7 flex justify-center">
         <canvas className="rounded-md" id={"canvasImagen1"}></canvas>
         <canvas className="rounded-md" id={"canvasImagen2"}></canvas>
       </div>
