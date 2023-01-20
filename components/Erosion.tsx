@@ -1,6 +1,5 @@
 import { ImageCard } from "./ImageCard";
 import { Input } from "./Input";
-import { zeros } from "mathjs";
 
 const ErosionAlgoritm = (matrixDimensions: number) => {
   var canvas1 = document.getElementById(
@@ -32,22 +31,45 @@ const ErosionAlgoritm = (matrixDimensions: number) => {
   function erosion() {
     var image = new Image() as any;
     image = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+
+    var imageResult = new Image() as any;
+    imageResult = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+    const resultPixels = imageResult.data;
+
     const pixels = image.data;
     const numPixels = image.width * image.height;
-
-    var matrix = zeros([matrixDimensions, matrixDimensions]);
 
     const diference = Math.trunc(matrixDimensions / 2);
     console.log(diference);
 
     for (var i = 0; i < numPixels; i++) {
+      var suma = 0;
       for (var m = 0; m < matrixDimensions; m++) {
         for (var n = 0; n < matrixDimensions; n++) {
-          var index = i + image.width * (diference) + (n - diference);
-          // var save = pixels[]
+          var index = i + image.width * (m - diference) + (n - diference);
+          if (
+            pixels[index * 4] == 255 ||
+            pixels[index * 4 + 1] == 255 ||
+            pixels[index * 4 + 2] == 255
+          ) {
+            suma = suma + 255;
+          }
         }
       }
+      if (suma > 0) {
+        paintPixel(resultPixels, i, 255);
+      }
     }
+
+    canvas2.width = image.width;
+    canvas2.height = image.height;
+    ctx2.putImageData(imageResult, 0, 4);
+  }
+
+  function paintPixel(imageData: any, i: number, color: number) {
+    imageData[i * 4] = color;
+    imageData[i * 4 + 1] = color;
+    imageData[i * 4 + 2] = color;
   }
 };
 
@@ -62,7 +84,16 @@ export const Erosion = () => {
       />
 
       <div className="container mx-auto flex justify-center">
-        <ImageCard variantName={"Imagen Original"} target={0} />=
+        <ImageCard variantName={"Imagen Original"} target={0} />
+        <input
+          className="w-16 h-10 bg-purple-600 mx-4 rounded-xl text-center text-slate-50 text-3xl"
+          type="number"
+          min={3}
+          max={35}
+          step={2}
+          defaultValue={3}
+          onChange={(e) => ErosionAlgoritm(parseInt(e.target.value))}
+        />
         <ImageCard variantName={"Imagen con Erosion"} target={1} />
       </div>
     </div>
