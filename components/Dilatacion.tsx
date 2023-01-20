@@ -31,8 +31,46 @@ const DilatacionAlgoritm = (matrixDimensions: number) => {
   function dilatacion() {
     var image = new Image() as any;
     image = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+
+    var imageResult = new Image() as any;
+    imageResult = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+    const resultPixels = imageResult.data;
+
     const pixels = image.data;
     const numPixels = image.width * image.height;
+
+    const diference = Math.trunc(matrixDimensions / 2);
+    console.log(diference);
+
+    for (var i = 0; i < numPixels; i++) {
+      var flagZero = false;
+      for (var m = 0; m < matrixDimensions; m++) {
+        for (var n = 0; n < matrixDimensions; n++) {
+          var index = i + image.width * (m - diference) + (n - diference);
+          if (
+            pixels[index * 4] == 0 ||
+            pixels[index * 4 + 1] == 0 ||
+            pixels[index * 4 + 2] == 0
+          ) {
+            flagZero = true;
+            break;
+          }
+        }
+      }
+      if (flagZero) {
+        paintPixel(resultPixels, i, 0);
+      }
+    }
+
+    canvas2.width = image.width;
+    canvas2.height = image.height;
+    ctx2.putImageData(imageResult, 0, 4);
+  }
+
+  function paintPixel(imageData: any, i: number, color: number) {
+    imageData[i * 4] = color;
+    imageData[i * 4 + 1] = color;
+    imageData[i * 4 + 2] = color;
   }
 };
 
@@ -47,8 +85,17 @@ export const Dilatacion = () => {
       />
 
       <div className="container mx-auto flex justify-center">
-        <ImageCard variantName={"Imagen Original"} target={0} />=
-        <ImageCard variantName={"Imagen con Erosion"} target={1} />
+        <ImageCard variantName={"Imagen Original"} target={0} />
+        <input
+          className="w-16 h-10 bg-purple-600 mx-4 rounded-xl text-center text-slate-50 text-3xl arrow"
+          type="number"
+          min={3}
+          max={25}
+          step={2}
+          defaultValue={3}
+          onChange={(e) => DilatacionAlgoritm(parseInt(e.target.value))}
+        />
+        <ImageCard variantName={"Imagen con Dilatacion"} target={1} />
       </div>
     </div>
   );
