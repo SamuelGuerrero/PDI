@@ -19,7 +19,11 @@ import { Scalar } from "../components/Scalar";
 import { Segmentacion } from "../components/Segmentacion";
 import { SegmentacionEuclideana } from "../components/SegmentacionEuclideana";
 import { SegmentacionMahalanobis } from "../components/SegmentacionMahalanobis";
+import { Dilatacion } from "../components/Dilatacion";
 import { Erosion } from "../components/Erosion";
+import { Esqueleto } from "../components/Esqueleto";
+import { Relleno } from "../components/Relleno";
+import { ErosionDilatacion } from "../components/ErosionDilatacion";
 
 export default function Home() {
   const [toolSelected, setToolSelected] = useState("RGB");
@@ -57,7 +61,11 @@ export default function Home() {
         <div>{toolSelected == "Segmentacion" && <Segmentacion />}</div>
         <div>{toolSelected == "Segmentacion Euclideana" && <SegmentacionEuclideana />}</div>
         <div>{toolSelected == "Segmentacion Mahalanobis" && <SegmentacionMahalanobis />}</div>
+        <div>{toolSelected == "Dilatacion" && <Dilatacion />}</div>
         <div>{toolSelected == "Erosion" && <Erosion />}</div>
+        <div>{toolSelected == "Esqueleto" && <Esqueleto />}</div>
+        <div>{toolSelected == "Relleno" && <Relleno />}</div>
+        <div>{toolSelected == "ErosionDilatacion" && <ErosionDilatacion />}</div>
       </div>
     </div>
   );

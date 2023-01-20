@@ -180,11 +180,47 @@ const DropdownMenuDemo = (props: NavBarProps) => {
 
           <DropdownMenuItem
             onClick={() => {
+              setMode("Dilatacion");
+              localStorage.setItem("toolSelected", "Dilatacion");
+            }}
+          >
+            Dilatacion
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
               setMode("Erosion");
               localStorage.setItem("toolSelected", "Erosion");
             }}
           >
             Erosion
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Esqueleto");
+              localStorage.setItem("toolSelected", "Esqueleto");
+            }}
+          >
+            Esqueleto
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("Relleno");
+              localStorage.setItem("toolSelected", "Relleno");
+            }}
+          >
+            Relleno
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            onClick={() => {
+              setMode("ErosionDilatacion");
+              localStorage.setItem("toolSelected", "ErosionDilatacion");
+            }}
+          >
+            ErosionDilatacion
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>
