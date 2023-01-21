@@ -216,11 +216,11 @@ const DropdownMenuDemo = (props: NavBarProps) => {
 
           <DropdownMenuItem
             onClick={() => {
-              setMode("ErosionDilatacion");
-              localStorage.setItem("toolSelected", "ErosionDilatacion");
+              setMode("Limpieza");
+              localStorage.setItem("toolSelected", "Limpieza");
             }}
           >
-            ErosionDilatacion
+            Limpieza
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu.Portal>

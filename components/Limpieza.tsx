@@ -32,16 +32,16 @@ const LimpiezaAlgoritm = (matrixDimensions: number) => {
     var image = new Image() as any;
     image = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
 
-    var imageResult = new Image() as any;
-    imageResult = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
-
     for (var i = 0; i < 10; i++) {
-      erosion(image, imageResult);
-      dilatacion(image, imageResult);
+      erosion(image);
+      dilatacion(image);
     }
   }
 
-  function dilatacion(image: any, imageResult: any) {
+  function dilatacion(image: any) {
+    var imageResult = new Image() as any;
+    imageResult = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+
     const resultPixels = imageResult.data;
     const pixels = image.data;
     const numPixels = image.width * image.height;
@@ -68,12 +68,17 @@ const LimpiezaAlgoritm = (matrixDimensions: number) => {
       }
     }
 
+    image = imageResult;
+
     canvas2.width = image.width;
     canvas2.height = image.height;
     ctx2.putImageData(imageResult, 0, 4);
   }
 
-  function erosion(image: any, imageResult: any) {
+  function erosion(image: any) {
+    var imageResult = new Image() as any;
+    imageResult = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+
     const resultPixels = imageResult.data;
 
     const pixels = image.data;
@@ -99,6 +104,7 @@ const LimpiezaAlgoritm = (matrixDimensions: number) => {
         paintPixel(resultPixels, i, 255);
       }
     }
+    image = imageResult;
 
     canvas2.width = image.width;
     canvas2.height = image.height;
@@ -133,7 +139,7 @@ export const Limpieza = () => {
           defaultValue={3}
           onChange={(e) => LimpiezaAlgoritm(parseInt(e.target.value))}
         />
-        <ImageCard variantName={"Imagen con ErosionDilatacion"} target={1} />
+        <ImageCard variantName={"Imagen limpia"} target={1} />
       </div>
     </div>
   );
