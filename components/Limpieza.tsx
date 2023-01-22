@@ -105,7 +105,6 @@ const LimpiezaAlgoritm = (matrixDimensions: number) => {
       }
     }
     image = imageResult;
-
     canvas2.width = image.width;
     canvas2.height = image.height;
     ctx2.putImageData(imageResult, 0, 4);
