@@ -12,8 +12,6 @@ const Mouse = () => {
 
   var ctx1 = canvas?.getContext("2d");
 
-
-
   var curFile = imagen1.files;
   image1.src = window.URL.createObjectURL(curFile[0]);
   image1.onload = function () {
@@ -21,7 +19,6 @@ const Mouse = () => {
     canvas.height = image1.height;
     ctx1.drawImage(image1, 0, 0);
     canvas.addEventListener('mousemove', manejadorRaton, false);
-    //manejadorRaton
   };
 
   function manejadorRaton(e) {
