@@ -34,7 +34,6 @@ export default function Home() {
       setToolSelected(toolInCookie)
     }
   }, []);
-
   return (
     <div className="h-screen">
       <Head>
